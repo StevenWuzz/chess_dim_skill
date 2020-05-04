@@ -1,5 +1,6 @@
 library(readr)
 library(dplyr)
+library(ggplot2)
 library(data.table)
 library(tidyr)
 library(reshape)
@@ -34,4 +35,6 @@ vec_cardinality_D <- rep(cardinality_D, nrow(trans_data))
 cardinality_D_data <- data.frame("car_D" = vec_cardinality_D)
 pmi_data <- log(trans_data$count) + log(cardinality_D_data$car_D) - log(trans_data_vocab$count_vocab) - log(trans_data_context$count_context)
 pmi_data_frame <- data.frame("PMI_value" = pmi_data)
-pmi_data_frame$PMI_Value[pmi_data_frame$PMI_value < 0] <- 0 #indeed, there are some negative values
+pmi_data_frame$PMI_value[pmi_data_frame$PMI_value < 0] <- 0 #indeed, there are some negative values
+
+complete_data <- train_dat %>% mutate(PPMI_value = pmi_data_frame$PMI_value)
