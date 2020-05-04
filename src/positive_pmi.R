@@ -1,6 +1,5 @@
 library(readr)
 library(dplyr)
-library(ggplot2)
 library(data.table)
 library(tidyr)
 library(reshape)
@@ -17,9 +16,22 @@ context_dat =  train_dat %>% group_by(user_hash) %>% summarise(count = n()) %>% 
 trans_data <- train_dat %>% group_by(tactics_problem_id, user_hash) %>% mutate(count= n()) #everything is 1???
 trans_data_vocab <- train_dat %>% group_by(tactics_problem_id) %>% mutate(count_vocab = n())
 trans_data_context <- train_dat %>% group_by(user_hash) %>% mutate(count_context = n())
+
+#check whether there are any NA in vocab_dat$count
+vec <- is.na(vocab_dat$count)
+vec <- !vec
+all(vec) #TRUE
+
+#check whether there are any NA in context_dat$count
+vec1 <- is.na(context_dat$count)
+vec1 <- !vec1
+all(vec1) #TRUE
+
+#no NA in both vocab_dat$count and context_dat$count
+
 cardinality_D <- sum(vocab_dat$count) + sum(context_dat$count)
 vec_cardinality_D <- rep(cardinality_D, nrow(trans_data))
 cardinality_D_data <- data.frame("car_D" = vec_cardinality_D)
 pmi_data <- log(trans_data$count) + log(cardinality_D_data$car_D) - log(trans_data_vocab$count_vocab) - log(trans_data_context$count_context)
 pmi_data_frame <- data.frame("PMI_value" = pmi_data)
-pmi_data_frame$PMI_Value[pmi_data_frame$PMI_value < 0] <- 0
+pmi_data_frame$PMI_Value[pmi_data_frame$PMI_value < 0] <- 0 #indeed, there are some negative values
