@@ -1,0 +1,1 @@
+{"embeddings": [{"tensorName": "Chess Puzzle Embeddings Tuned (Failed Attempts)", "tensorShape": [42239, 25], "tensorPath": "https://raw.githubusercontent.com/StevenWuzz/chess_dim_skill/master/dim265vectors_tuned_trimmed_failed.tsv", "metadataPath": "https://raw.githubusercontent.com/StevenWuzz/chess_dim_skill/master/dim265meta_tuned_trimmed_failed.tsv"}]}
