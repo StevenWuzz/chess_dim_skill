@@ -1,1 +1,0 @@
-{"embeddings": [{"tensorName": "Chess Puzzle Embeddings Tuned (Updated w/ Clusters)", "tensorShape": [42278, 265], "tensorPath": "https://raw.githubusercontent.com/StevenWuzz/chess_dim_skill/master/steventest.tsv", "metadataPath": "https://raw.githubusercontent.com/StevenWuzz/chess_dim_skill/master/dim265meta_tuned_final_updated.tsv"}]}
